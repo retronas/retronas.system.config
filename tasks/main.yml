@@ -1,6 +1,11 @@
 - name: "{{ my_name }} - Load RetroNAS config"
   include_vars: retronas_vars.yml
 
+- name: Gather facts
+  setup:
+    gather_facts: yes
+  when: ansible_facts is not defined
+
 - name: "{{ my_name }} - Create retronas user system dirs"
   file:
     path: "{{ retronas_path }}/{{ item }}"
